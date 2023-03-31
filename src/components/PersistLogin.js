@@ -17,24 +17,28 @@ const PersistLogin = () => {
       } catch (err) {
         console.error(err);
       } finally {
+        console.log("cant");
         isMounted && setIsLoading(false);
       }
     };
 
     // persist added here AFTER tutorial video
     // Avoids unwanted call to verifyRefreshToken
-    !auth?.accessToken && persist ? verifyRefreshToken() : setIsLoading(false);
+
+    !auth?.accessToken ? verifyRefreshToken() : setIsLoading(false);
 
     return () => (isMounted = false);
   }, []);
 
   useEffect(() => {
     console.log(`isLoading: ${isLoading}`);
+    console.log("okea");
     console.log(`aT: ${JSON.stringify(auth?.accessToken)}`);
   }, [isLoading]);
 
   return (
-    <>{!persist ? <Outlet /> : isLoading ? <p>Loading...</p> : <Outlet />}</>
+    // <>{!persist ? <Outlet /> : isLoading ? <p>Loading...</p> : <Outlet />}</>
+    <>{isLoading ? <p>Loading...</p> : <Outlet />}</>
   );
 };
 

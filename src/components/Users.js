@@ -11,6 +11,7 @@ import DataGrid, {
   Paging,
   SearchPanel,
 } from "devextreme-react/data-grid";
+import axios from "../api/axios";
 const Users = () => {
   const [users, setUsers] = useState();
   const axiosPrivate = useAxiosPrivate();
@@ -23,9 +24,16 @@ const Users = () => {
 
     const getUsers = async () => {
       try {
-        const response = await axiosPrivate.get("/api/users", {
-          signal: controller.signal,
+        const response = await axios.get("/api/users", {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+          withCredentials: true,
         });
+        // const response = await axiosPrivate.get("/api/users", {
+        //   signal: controller.signal,
+        // });
         //console.log(response);
         console.log(response.data);
         isMounted && setUsers(response.data);

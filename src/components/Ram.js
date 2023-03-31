@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import RequireAuth from "./RequireAuth";
+import Button from "react-bootstrap/Button";
 import {
   Nav,
   Navbar,
@@ -18,14 +19,17 @@ import { useContext } from "react";
 import AuthContext from "../context/AuthProvider";
 import Users from "./Users";
 import useAuth from "../hooks/useAuth";
+import useLogout from "../hooks/useLogout";
 const Ram = () => {
   const { setAuth } = useContext(AuthContext);
   const navigate = useNavigate();
+  const logout = useLogout();
   const { auth } = useAuth();
-  const logout = async () => {
+
+  const signmeout = async () => {
     // if used in more components, this should be in context
     // axios to /logout endpoint
-    setAuth({});
+    await logout();
     navigate("/login");
   };
 
@@ -39,7 +43,7 @@ const Ram = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              {console.log(auth.roles[0])}
+              {/* {console.log(auth.roles[0])} */}
               {auth.roles[0] === "ROLE_USER" ? (
                 <Nav.Link style={{ color: "white" }} as={Link} to="/homeView">
                   Home
@@ -51,7 +55,9 @@ const Ram = () => {
                 Home
               </Nav.Link> */}
               <Nav.Link style={{ color: "white" }} as={Link} to="/gridView">
-                Grid
+                <Button style={{ fontSize: "20px" }} variant="outline-success">
+                  Grid
+                </Button>
               </Nav.Link>
               {/* <NavDropdown
                 style={{ color: "white" }}
@@ -72,13 +78,20 @@ const Ram = () => {
               </NavDropdown> */}
             </Nav>
             <Nav>
-              <Nav.Link
+              <Button
+                style={{ fontSize: "20px" }}
+                variant="outline-success"
+                onClick={logout}
+              >
+                Sign Out
+              </Button>
+              {/* <Nav.Link
                 className=" btn navbar-btn btn-danger"
                 style={{ color: "white" }}
                 onClick={logout}
               >
                 Sign Out
-              </Nav.Link>
+              </Nav.Link> */}
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -96,8 +109,8 @@ const Ram = () => {
         <Route path="/" element={<Users />} />
         {/* <Route path="/homeView" element={<HomeView />} />
         <Route path="/gridView" element={<GridView />} /> */}
-        <Route path="/homeView" element={<Users />} />
-        <Route path="/gridView" element={<Users />} />
+        {/* <Route path="/homeView" element={<Users />} />
+        <Route path="/gridView" element={<Users />} /> */}
       </Routes>
     </div>
   );

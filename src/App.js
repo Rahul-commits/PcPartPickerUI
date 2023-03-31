@@ -25,20 +25,23 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         {/* public routes */}
+        console.log("passed ones");
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="linkpage" element={<LinkPage />} />
         <Route path="unauthorized" element={<Unauthorized />} />
-
         {/* we want to protect these routes */}
         <Route element={<PersistLogin />}>
+          console.log("passed one");
           <Route
             element={<RequireAuth allowedRoles={[ROLES.Admin, ROLES.User]} />}
           >
             <Route path="/" element={<Ram />}>
-              <Route path="/homeView" element={<HomeView />} />
-              <Route path="/gridView" element={<GridView />} />
+              {/* <Route path="homeView" element={<HomeView />} />
+              <Route path="gridView" element={<GridView />} /> */}
             </Route>
+            <Route path="/homeView" element={<Ram />} />
+            <Route path="/gridView" element={<Ram />} />
             {/* <Route path="/admin" element={<Ram />}>
             <Route path="/admin/homeView" element={<HomeView />} />
             <Route path="/admin/gridView" element={<GridView />} />
@@ -65,7 +68,6 @@ function App() {
         >
           <Route path="lounge" element={<Lounge />} />
         </Route> */}
-
         {/* catch all */}
         {/* <Route path="*" element={<Missing />} /> */}
       </Route>

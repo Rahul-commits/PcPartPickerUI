@@ -17,6 +17,11 @@ const RequireAuth = ({ allowedRoles }) => {
 
   //console.log(myrole);
   console.log("final");
+  console.log(auth.accessToken);
+  console.log("Seri");
+  console.log(auth.roles);
+  console.log(allowedRoles);
+  console.log(allowedRoles.includes(auth.roles));
   return auth?.roles?.find((role) => allowedRoles?.includes(role)) ? (
     //return auth?.role === allowedRoles ? (
     <Outlet />
@@ -29,7 +34,7 @@ const RequireAuth = ({ allowedRoles }) => {
   // ) : (
   //   <Navigate to="/" state={{ from: location }} replace />
   // )
-  auth?.user ? (
+  auth?.accessToken ? (
     <Navigate to="/unauthorized" state={{ from: location }} replace />
   ) : (
     <Navigate to="/login" state={{ from: location }} replace />
