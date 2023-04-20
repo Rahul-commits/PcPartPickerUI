@@ -255,6 +255,9 @@ const MotherboardBody = () => {
   function setCellValue2(rowData, value) {
     rowData.pciGeneration = value.generation;
   }
+  function setCellValue3(rowData, value) {
+    rowData.socket = value.socket;
+  }
   function setCellValue4(rowData, value) {
     rowData.eccCompatibility = value.eccValue;
   }
@@ -265,7 +268,8 @@ const MotherboardBody = () => {
       (e.parentType === "dataRow" && e.dataField === "memoryTypeId") ||
       e.dataField === "dimmSlotTypeId" ||
       e.dataField === "pciGeneration" ||
-      e.dataField === "eccCompatibility"
+      e.dataField === "eccCompatibility" ||
+      e.dataField === "socket"
     ) {
       e.editorOptions.onValueChanged = function (ev) {
         let selectedItem = ev.component.option("selectedItem");
@@ -348,6 +352,18 @@ const MotherboardBody = () => {
             dataSource={pciExpressSlotTypes}
             displayExpr="generation"
             valueExpr="generation"
+          />
+        </Column>
+        <Column
+          dataField="socket"
+          caption="CPU socket"
+          allowEditing={true}
+          setCellValue={setCellValue3}
+        >
+          <Lookup
+            dataSource={cpuSocketTypes}
+            displayExpr="socket"
+            valueExpr="socket"
           />
         </Column>
         {}

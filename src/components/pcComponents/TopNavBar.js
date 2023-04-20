@@ -165,7 +165,7 @@ const TopNavBar = (props) => {
               ) : (
                 ""
               )} */}
-              {/* {auth.roles[0] === "ROLE_ADMIN" ? (
+              {auth.roles[0] === "ROLE_ADMIN" ? (
                 <Nav.Link style={{ color: "white" }} as={Link} to="/userView">
                   <Button
                     style={{ fontSize: "18px" }}
@@ -176,7 +176,7 @@ const TopNavBar = (props) => {
                 </Nav.Link>
               ) : (
                 ""
-              )} */}
+              )}
               {/* <NavDropdown
                 style={{ color: "white" }}
                 title="Dropdown"
