@@ -10,11 +10,18 @@ import Unauthorized from "./components/Unauthorized";
 import LinkPage from "./components/LinkPage";
 import RequireAuth from "./components/RequireAuth";
 import { Routes, Route } from "react-router-dom";
-import Ram from "./components/Ram";
+import Ram from "./components/pcComponents/Ram";
 import GridView from "./components/GridView";
 import HomeView from "./components/HomeView";
 import Testing from "./components/Testing";
 import PersistLogin from "./components/PersistLogin";
+import Motherboard from "./components/pcComponents/Motherboard";
+import GraphicsCard from "./components/pcComponents/GraphicsCard";
+import PowerSupply from "./components/pcComponents/PowerSupply";
+import Cpu from "./components/pcComponents/Cpu";
+import StorageDevice from "./components/pcComponents/StorageDevice";
+import Users from "./components/pcComponents/Users";
+import PCConfig from "./components/pcComponents/PCConfig";
 const ROLES = {
   User: "ROLE_USER",
   Admin: "ROLE_ADMIN",
@@ -36,12 +43,19 @@ function App() {
           <Route
             element={<RequireAuth allowedRoles={[ROLES.Admin, ROLES.User]} />}
           >
-            <Route path="/" element={<Ram />}>
+            <Route path="/" element={<Cpu />}>
               {/* <Route path="homeView" element={<HomeView />} />
               <Route path="gridView" element={<GridView />} /> */}
             </Route>
-            <Route path="/homeView" element={<Ram />} />
-            <Route path="/gridView" element={<Ram />} />
+            <Route path="/cpuView/*" element={<Cpu />} />
+            <Route path="/ramView/*" element={<Ram />} />
+            <Route path="/motherboardView/*" element={<Motherboard />} />
+            <Route path="/graphicsCardView/*" element={<GraphicsCard />} />
+            <Route path="/powerSupplyView/*" element={<PowerSupply />} />
+            <Route path="/storageView/*" element={<StorageDevice />} />
+            <Route path="/userView/*" element={<Users />} />
+            <Route path="/pcConfigView/*" element={<PCConfig />} />
+
             {/* <Route path="/admin" element={<Ram />}>
             <Route path="/admin/homeView" element={<HomeView />} />
             <Route path="/admin/gridView" element={<GridView />} />

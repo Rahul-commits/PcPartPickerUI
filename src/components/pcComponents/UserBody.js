@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
 import { themes } from "devextreme/ui/themes";
 import "devextreme/dist/css/dx.dark.css";
@@ -12,10 +12,11 @@ import DataGrid, {
   Pager,
   Paging,
   SearchPanel,
+  FilterRow,
 } from "devextreme-react/data-grid";
-import axios from "../api/axios";
+import axios from "../../api/axios";
 
-const Users = () => {
+const UserBody = () => {
   const [users, setUsers] = useState();
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
@@ -204,6 +205,7 @@ const Users = () => {
     // </article>
     <div>
       <DataGrid
+        columnAutoWidth={true}
         dataSource={users}
         keyExpr="id"
         //  ref={dataGridRef}
@@ -227,6 +229,7 @@ const Users = () => {
           allowDeleting={true}
           allowAdding={true}
         />
+        <FilterRow visible={true} />
         {/* <Column dataField="id" caption="ID" allowEditing={true} /> */}
         <Column dataField="username" caption="Username" allowEditing={true} />
         <Column dataField="password" caption="Password" allowEditing={true} />
@@ -297,4 +300,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default UserBody;
